@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather/globalcontroller/global_controller.dart';
 import 'package:get/get.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
