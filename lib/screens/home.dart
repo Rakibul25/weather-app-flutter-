@@ -20,11 +20,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white30,
         body: SafeArea(
             child: Obx(() => globalController.checkLoading().isTrue
                 ? const Center(child: LinearProgressIndicator())
-                : Center(
-                    child: TopView(),
-                  ))));
+                : Column(
+              children: [
+                TopView()
+              ],
+            ))));
   }
 }
