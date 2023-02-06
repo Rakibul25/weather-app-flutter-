@@ -51,3 +51,5 @@ class GlobalController extends GetxController {
     });
   }
 }
+
+
