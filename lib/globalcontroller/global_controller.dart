@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:android_intent_plus/flag.dart';
+
 
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;

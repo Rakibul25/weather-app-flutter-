@@ -48,10 +48,11 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   geolocator: ^9.0.2
-  geocode: 1.0.2
+  geocode: ^1.0.2
   get: ^4.6.5
   permission_handler: ^9.2.0
   android_intent_plus: ^3.1.5
+  geocoding: ^2.0.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
