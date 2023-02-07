@@ -12,11 +12,37 @@ class MiddleView extends StatefulWidget {
 }
 
 class _MiddleViewState extends State<MiddleView> {
+  List<WeatherInfo> weatherdata = [];
+  final uri = Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=23.800322&lon=90.429306&appid=ce1c380d53098d84afba49d96200b5cb&units=metric&fbclid=IwAR2FcySmETLtyhMwpk06BwMM_yPwIWTPaX1Rph_Yngx6dRDuoAbHdnjK8HU');
+  String a ='';
+  Future<void> fetchUsers() async {
+    http.Response response = await http.get(uri);
+    final decode = await json.decode(response.body)!;
+    String data = decode.toString();
+    WeatherInfo weatherInfo = welcomeFromJson(data);
+    //print(weatherInfo.visibility);
+    a = weatherInfo.visibility.toString();
 
+    @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      this.fetchUsers();
+    }
+
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.fetchUsers();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Hello"),
+      child: Text(a),
     );
   }
 }
