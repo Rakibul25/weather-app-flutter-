@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:weather/private_data/fetch_weather.dart';
 
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
@@ -35,19 +35,22 @@ class GlobalController extends GetxController {
 
     if (locationPermission == LocationPermission.deniedForever) {
       return Future.error("Permission denied forever");
-    }else
-    if (locationPermission == LocationPermission.denied) {
+    } else if (locationPermission == LocationPermission.denied) {
       locationPermission = await Geolocator.requestPermission();
       if (locationPermission == LocationPermission.denied) {
         return Future.error("Permission denied");
       }
     }
     return await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high)
+        desiredAccuracy: LocationAccuracy.high)
         .then((value) {
       _laltitude.value = value.latitude;
       _longitude.value = value.longitude;
-      _isLoading.value = false;
+      return FetchWeatherData().processdata(value.latitude, value.longitude).then((value)
+      {
+        _isLoading.value = false;
+      });
+
     });
   }
 }

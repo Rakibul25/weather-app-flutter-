@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
               children: [
                 TopView(),
                 SizedBox(height: 10,),
-                MiddleView()
+                Container(height: 50, child: MiddleView())
               ],
             ))));
   }
