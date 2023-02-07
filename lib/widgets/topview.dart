@@ -18,7 +18,7 @@ class _TopViewState extends State<TopView> {
   List<Placemark> placemarksList = [];
   String city = "";
   double widthg = 0.0;
-  String currentDate = DateFormat('dd.MM.yyyy').format(DateTime.now());
+  String currentDate = DateFormat('yMMMMd').format(DateTime.now());
   String currentweekDate = DateFormat('EEEE').format(DateTime.now());
   final GlobalController globalController =
       Get.put(GlobalController(), permanent: true);

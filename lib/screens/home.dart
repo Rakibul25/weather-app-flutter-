@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/globalcontroller/global_controller.dart';
 import 'package:get/get.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:weather/widgets/middleview.dart';
 
 import '../widgets/topview.dart';
 
@@ -26,7 +25,9 @@ class _HomeState extends State<Home> {
                 ? const Center(child: LinearProgressIndicator())
                 : Column(
               children: [
-                TopView()
+                TopView(),
+                SizedBox(height: 10,),
+                MiddleView()
               ],
             ))));
   }
