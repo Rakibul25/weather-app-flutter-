@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather/private_data/fetch_weather.dart';
+
+import '../private_data/fetchweather.dart';
 
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
@@ -25,7 +26,6 @@ class GlobalController extends GetxController {
   void getLocation() async {
     bool isServiceEnabled;
     LocationPermission locationPermission;
-
     isServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isServiceEnabled) {
       return Future.error("Location is not enabled");
@@ -42,17 +42,12 @@ class GlobalController extends GetxController {
       }
     }
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high)
+            desiredAccuracy: LocationAccuracy.high)
         .then((value) {
       _laltitude.value = value.latitude;
       _longitude.value = value.longitude;
-      return FetchWeatherData().processdata(value.latitude, value.longitude).then((value)
-      {
-        _isLoading.value = false;
-      });
 
+      _isLoading.value = false;
     });
   }
 }
-
-
