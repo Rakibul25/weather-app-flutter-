@@ -44,53 +44,58 @@ class _TopViewState extends State<TopView> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     widthg = size.width;
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Column(
-              children: [
-                Text(
-                  currentDate.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Text(
-                  currentweekDate.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: widthg * .80,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Obx(() => globalController.checkLoading().isTrue
+        ? const Center(child: CircularProgressIndicator())
+        : Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TopDataView(title: city),
-                  TopDataView(title: temperature.toString()+ "°C")
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        currentDate.toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        currentweekDate.toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Center(child: Image.asset('assets/icon/snow.png',height: 50,width: size.width*.80,)),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: widthg * .80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TopDataView(title: city),
+                        TopDataView(title: temperature.toString() + "°C")
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      
+                    ],
+                  )
                 ],
+
               ),
             ),
-            Center(
-              child: Container(
-                child: Icon(
-                  Icons.cloud,
-                  size: 50,
-                  color: Colors.white60,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+          ));
   }
 
   getAddress(lat, lon) async {
@@ -102,14 +107,12 @@ class _TopViewState extends State<TopView> {
     });
   }
 
+//fetching data
   void getdata(lat, lan) async {
     weatherInfo = await fetchWeather.processdata(lat, lan);
-
     setState(() {
-      temperature = (weatherInfo?.main?.feelsLike?.round()).toString();
+      temperature = (weatherInfo?.main?.temp?.round()).toString();
     });
-    print(weatherInfo?.main?.temp);
-
-
+    //print(weatherInfo?.main?.temp);
   }
 }

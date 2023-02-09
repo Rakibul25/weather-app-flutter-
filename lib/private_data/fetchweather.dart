@@ -21,7 +21,7 @@ class FetchWeather {
     } else {
       print("failed");
     }
-    print(weatherInfo?.main?.temp);
+    print(weatherInfo?.main?.pressure);
     return weatherInfo;
 
   }
