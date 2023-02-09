@@ -1,11 +1,14 @@
-
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/globalcontroller/global_controller.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
+import 'package:weather/models/mainweather.dart';
+import 'package:weather/private_data/fetchweather.dart';
 import 'package:weather/widgets/topdataview.dart';
+
+import '../models/weatherInfo.dart';
 
 class TopView extends StatefulWidget {
   const TopView({Key? key}) : super(key: key);
@@ -17,16 +20,23 @@ class TopView extends StatefulWidget {
 class _TopViewState extends State<TopView> {
   List<Placemark> placemarksList = [];
   String city = "";
+  String temperature = "";
   double widthg = 0.0;
   String currentDate = DateFormat('yMMMMd').format(DateTime.now());
   String currentweekDate = DateFormat('EEEE').format(DateTime.now());
   final GlobalController globalController =
       Get.put(GlobalController(), permanent: true);
+  WeatherInfo? weatherInfo;
+  FetchWeather fetchWeather = FetchWeather();
+  var data;
 
   @override
   void initState() {
+    getdata(globalController.getLaltitude().value,
+        globalController.getLongtitude().value);
     getAddress(globalController.getLaltitude().value,
         globalController.getLongtitude().value);
+    //print(mainWeather?.temp);
     super.initState();
   }
 
@@ -59,15 +69,22 @@ class _TopViewState extends State<TopView> {
               height: 20,
             ),
             SizedBox(
-              width: widthg*.80,
+              width: widthg * .80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [TopDataView(title: city), TopDataView(title: "19°C")],
+                children: [
+                  TopDataView(title: city),
+                  TopDataView(title: temperature.toString()+ "°C")
+                ],
               ),
             ),
             Center(
               child: Container(
-                child: Icon(Icons.cloud,size: 50,color: Colors.white60,),
+                child: Icon(
+                  Icons.cloud,
+                  size: 50,
+                  color: Colors.white60,
+                ),
               ),
             )
           ],
@@ -78,9 +95,21 @@ class _TopViewState extends State<TopView> {
 
   getAddress(lat, lon) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, lon);
+    //print(lat);
     Placemark place = placemarks[0];
     setState(() {
       city = place.locality!;
     });
+  }
+
+  void getdata(lat, lan) async {
+    weatherInfo = await fetchWeather.processdata(lat, lan);
+
+    setState(() {
+      temperature = (weatherInfo?.main?.feelsLike?.round()).toString();
+    });
+    print(weatherInfo?.main?.temp);
+
+
   }
 }
