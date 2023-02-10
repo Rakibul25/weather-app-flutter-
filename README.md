@@ -15,4 +15,4 @@ This is a weather application which will show you real-time weather update. Usin
 - Flutter
 - OpenWeather API
 # Screenshots
-<img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/home.jpg" width="430" height="230">
+<img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/home.jpg" width="220" height="430">
