@@ -23,7 +23,6 @@ class _HomeState extends State<Home> {
   final GlobalController globalController =
       Get.put(GlobalController(), permanent: true);
 
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -31,7 +30,8 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white30,
         body: Stack(
           children: [
-            Image.asset('assets/icon/mycap.jpg',width: size.width,height: size.height, fit: BoxFit.cover),
+            Image.asset('assets/icon/mycap.jpg',
+                width: size.width, height: size.height, fit: BoxFit.cover),
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
               child: Container(
@@ -42,7 +42,10 @@ class _HomeState extends State<Home> {
             ),
             SafeArea(
                 child: Obx(() => globalController.checkLoading().isTrue
-                    ? const Center(child: LinearProgressIndicator())
+                    ? Center(
+                        child: Center(
+                        child: CircularProgressIndicator()
+                      ))
                     : Column(
                         children: const [
                           TopView(),

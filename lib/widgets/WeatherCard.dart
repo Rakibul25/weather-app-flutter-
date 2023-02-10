@@ -143,7 +143,7 @@ class WeatherCard extends StatelessWidget {
                       fontStyle: FontStyle.italic),
                 ),
                 Text(
-                  "$visibility km/h",
+                  "$visibility km",
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
