@@ -14,6 +14,11 @@ This is a weather application which will show you real-time weather update. Usin
 # Developed Using
 - Flutter
 - OpenWeather API
+# packages
+- GetX for state management.
+- http for fetching data from internet
+- geolocator, geocoding for get device current position(longitude, lattitude) and convert that into details about location.
+- intl for date-time formation.
 # Screenshots
 <img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/home.jpg" width="220" height="430">
 
