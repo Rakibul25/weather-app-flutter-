@@ -16,7 +16,7 @@ This is a weather application which will show you real-time weather update. Usin
 - OpenWeather API
 # Screenshots
 <img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/home.jpg" width="220" height="430">
-# Developed by
- [Rakibul Islam](https://github.com/Rakibul25)
+# Developed by 
+[Rakibul Islam](https://github.com/Rakibul25/)
 
 Thank You :) ☕
