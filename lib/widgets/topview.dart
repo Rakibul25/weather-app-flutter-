@@ -6,6 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/models/mainweather.dart';
 import 'package:weather/private_data/fetchweather.dart';
+import 'package:weather/widgets/WeatherCard.dart';
 import 'package:weather/widgets/topdataview.dart';
 
 import '../models/weatherInfo.dart';
@@ -21,6 +22,15 @@ class _TopViewState extends State<TopView> {
   List<Placemark> placemarksList = [];
   String city = "";
   String temperature = "";
+  String feelslike = "";
+  String icon = "";
+  String pressure = "";
+  String humidity = "";
+  String speed = "";
+  String clouds = "";
+  String details = "";
+  String visibility = "";
+  String country = "";
   double widthg = 0.0;
   String currentDate = DateFormat('yMMMMd').format(DateTime.now());
   String currentweekDate = DateFormat('EEEE').format(DateTime.now());
@@ -47,52 +57,50 @@ class _TopViewState extends State<TopView> {
     return Obx(() => globalController.checkLoading().isTrue
         ? const Center(child: CircularProgressIndicator())
         : Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        currentDate.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      Text(
-                        currentweekDate.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Center(child: Image.asset('assets/icon/snow.png',height: 50,width: size.width*.80,)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: widthg * .80,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TopDataView(title: city),
-                        TopDataView(title: temperature.toString() + "°C")
+                        Text(
+                          currentDate.toString(),
+                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        Text(
+                          currentweekDate.toString(),
+                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      
-                    ],
-                  )
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: widthg * .80,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TopDataView(title: city, temp: temperature.toString() + "°C", icon: icon, details: details,country : country)
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    WeatherCard(feelslike: feelslike, pressure: pressure, humidity: humidity, speed: speed, clouds: clouds, icon: icon, details: details, visibility: visibility,)
 
+                  ],
+
+                ),
               ),
             ),
           ));
@@ -112,7 +120,18 @@ class _TopViewState extends State<TopView> {
     weatherInfo = await fetchWeather.processdata(lat, lan);
     setState(() {
       temperature = (weatherInfo?.main?.temp?.round()).toString();
+      feelslike = (weatherInfo?.main?.feelsLike?.round()).toString();
+      icon = (weatherInfo?.weather![0]?.icon).toString();
+      details = (weatherInfo?.weather![0]?.description).toString();
+      pressure = (weatherInfo?.main?.pressure).toString();
+      humidity = (weatherInfo?.main?.humidity?.round()).toString();
+      speed = (weatherInfo?.wind?.speed).toString();
+      clouds = (weatherInfo?.clouds?.all).toString();
+      visibility = (weatherInfo?.visibility).toString();
+      country = (weatherInfo?.sys?.country).toString();
     });
-    //print(weatherInfo?.main?.temp);
+    print(visibility);
   }
 }
+
+

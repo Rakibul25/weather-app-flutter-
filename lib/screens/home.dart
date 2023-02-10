@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/globalcontroller/global_controller.dart';
@@ -25,20 +26,29 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white30,
-        body: SafeArea(
-            child: Obx(() => globalController.checkLoading().isTrue
-                ? const Center(child: LinearProgressIndicator())
-                : Column(
-                    children: const [
-                      TopView(),
-                      SizedBox(
-                        height: 10,
-                      ),
-
-                      //Container(height: 50, child: MiddleView(temp1: "temp1",))
-                    ],
-                  ))));
+        body: Stack(
+          children: [
+            Image.asset('assets/icon/mycap.jpg',width: size.width,height: size.height, fit: BoxFit.cover),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+              child: Container(
+                width: size.width,
+                height: size.height,
+                color: Colors.black.withOpacity(0.1),
+              ),
+            ),
+            SafeArea(
+                child: Obx(() => globalController.checkLoading().isTrue
+                    ? const Center(child: LinearProgressIndicator())
+                    : Column(
+                        children: const [
+                          TopView(),
+                        ],
+                      ))),
+          ],
+        ));
   }
 }
