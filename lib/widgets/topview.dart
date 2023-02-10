@@ -134,6 +134,6 @@ class _TopViewState extends State<TopView> {
       visibility = (weatherInfo?.visibility).toString();
       country = (weatherInfo?.sys?.country).toString();
     });
-    
+
   }
 }
