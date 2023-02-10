@@ -71,35 +71,39 @@ class _TopViewState extends State<TopView> {
                       children: [
                         Text(
                           currentDate.toString(),
-                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 20),
                         ),
                         Text(
                           currentweekDate.toString(),
-                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 20),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-
                       ],
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 40,
                     ),
+                    TopDataView(
+                        title: city,
+                        temp: temperature.toString() + "°C",
+                        icon: icon,
+                        details: details,
+                        country: country),
                     SizedBox(
-                      width: widthg * .80,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TopDataView(title: city, temp: temperature.toString() + "°C", icon: icon, details: details,country : country)
-                        ],
-                      ),
+                      height: 30,
                     ),
-                    SizedBox(height: 15,),
-                    WeatherCard(feelslike: feelslike, pressure: pressure, humidity: humidity, speed: speed, clouds: clouds, icon: icon, details: details, visibility: visibility,)
-
+                    WeatherCard(
+                      feelslike: feelslike,
+                      pressure: pressure,
+                      humidity: humidity,
+                      speed: speed,
+                      clouds: clouds,
+                      icon: icon,
+                      details: details,
+                      visibility: visibility,
+                    )
                   ],
-
                 ),
               ),
             ),
@@ -133,5 +137,3 @@ class _TopViewState extends State<TopView> {
     print(visibility);
   }
 }
-
-

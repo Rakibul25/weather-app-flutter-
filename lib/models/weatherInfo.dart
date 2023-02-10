@@ -11,7 +11,7 @@ class WeatherInfo {
   List<Weather>? weather;
   String? base;
   MainWeather? main;
-  int? visibility;
+  num? visibility;
   Wind? wind;
   Clouds? clouds;
   int? dt;
@@ -46,7 +46,7 @@ class WeatherInfo {
     }
     base = json['base'];
     main = json['main'] != null ? new MainWeather.fromJson(json['main']) : null;
-    visibility = json['visibility'];
+    visibility = json['visibility']/1000;
     wind = json['wind'] != null ? new Wind.fromJson(json['wind']) : null;
     clouds =
     json['clouds'] != null ? new Clouds.fromJson(json['clouds']) : null;
