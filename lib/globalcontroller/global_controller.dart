@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../private_data/fetchweather.dart';
-
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
   final RxDouble _laltitude = 0.0.obs;
@@ -30,6 +28,7 @@ class GlobalController extends GetxController {
     if (!isServiceEnabled) {
       return Future.error("Location is not enabled");
     }
+
 
     locationPermission = await Geolocator.checkPermission();
 
