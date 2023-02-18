@@ -13,12 +13,14 @@ class TopDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SizedBox(
-      width: size.width * .80,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 0),
+    return Card(
+      color: Colors.white24,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: Container(
+        width: size.width * .90,
+        height: size.height*.30,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +29,7 @@ class TopDataView extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic),
@@ -38,7 +40,7 @@ class TopDataView extends StatelessWidget {
                 Text(
                   country,
                   style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic),
@@ -49,7 +51,7 @@ class TopDataView extends StatelessWidget {
                 Text(
                   temp,
                   style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic),
@@ -74,7 +76,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -96,7 +98,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -118,7 +120,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -140,7 +142,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -162,7 +164,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -184,7 +186,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -206,7 +208,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -228,7 +230,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -250,7 +252,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -272,7 +274,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -294,7 +296,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -316,7 +318,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -338,7 +340,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -360,7 +362,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -382,7 +384,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -404,7 +406,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -426,7 +428,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -448,7 +450,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
@@ -470,7 +472,7 @@ class TopDataView extends StatelessWidget {
                       Text(
                         details,
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
