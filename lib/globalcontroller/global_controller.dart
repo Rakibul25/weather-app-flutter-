@@ -29,7 +29,6 @@ class GlobalController extends GetxController {
       return Future.error("Location is not enabled");
     }
 
-
     locationPermission = await Geolocator.checkPermission();
 
     if (locationPermission == LocationPermission.deniedForever) {
