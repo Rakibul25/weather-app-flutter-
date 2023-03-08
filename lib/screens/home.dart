@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:weather/models/mainweather.dart';
 import 'package:weather/private_data/fetchweather.dart';
 import 'package:weather/widgets/topdataview.dart';
-
+import 'package:lottie/lottie.dart';
 import '../models/weatherInfo.dart';
 import '../widgets/topview.dart';
 
@@ -27,24 +27,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         body: Stack(
           children: [
-            Image.asset('assets/icon/mycap.jpg',
-                width: size.width, height: size.height, fit: BoxFit.cover),
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Container(
-                width: size.width,
-                height: size.height,
-                color: Colors.black.withOpacity(0.1),
-              ),
-            ),
             SafeArea(
                 child: Obx(() => globalController.checkLoading().isTrue
                     ? Center(
                         child: Center(
-                        child: CircularProgressIndicator()
+                        child: Lottie.asset("assets/lotties/splash.json")
                       ))
                     : Column(
                         children: const [

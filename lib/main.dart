@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/screens/home.dart';
+import 'package:weather/screens/splash.dart';
 
 void main() {
   runApp(const MyApp());
