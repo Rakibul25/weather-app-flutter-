@@ -5,5 +5,7 @@ class SearchIconPressed extends weatherEvent{
   final String query;
   SearchIconPressed(this.query);
 }
+class HomeCall extends weatherEvent{
+}
 
 
