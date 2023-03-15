@@ -9,13 +9,13 @@ class FetchWeather {
   API api = API();
 
   //this function to fetch for initial blocs page
-  void getWeather() async {
+  Future<WeatherInfo> getWeatherWithCor(double lat, double lon) async {
     try {
       //trying to fetch blocs result with blocs keyword
       Response response = await api.sendRequest.get(
-          "https://api.openweathermap.org/data/2.5/weather?lat=23.800322&lon=90.429306&appid=$Apikey&units=metric&fbclid=IwAR03H7NMdCtc5AscJEjcalAuesRR-GYDZZrpN1i5E-byKYIxemaPmw7colM");
+          "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$Apikey&units=metric&fbclid=IwAR03H7NMdCtc5AscJEjcalAuesRR-GYDZZrpN1i5E-byKYIxemaPmw7colM");
       var data = response.data;
-      print(data.toString());
+      return WeatherInfo.fromJson(data);
       //saving instance in data and parsing in productmodel and then return
       //return WeatherInfo.fromJson(data);
     } catch (ex) {

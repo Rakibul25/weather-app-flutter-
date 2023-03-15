@@ -12,23 +12,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  FetchWeather fetchWeather = FetchWeather();
-  @override
-  void initState() {
-    // TODO: implement initState
-    fetchWeather.getWeather();
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.white,
       body: BlocBuilder<WeatherBloc, weatherState>(
         builder: (context,state){
           if(state is InitialSate){
             BlocProvider.of<WeatherBloc>(context).add(HomeCall());
             return Center(
               child: CircularProgressIndicator(),
+            );
+          }
+          if(state is ResultLoadedState){
+            return Center(
+              child: Text(state.weatherInfo.main.temp.toString()),
             );
           }
 

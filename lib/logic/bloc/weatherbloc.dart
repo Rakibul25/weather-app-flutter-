@@ -1,19 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/data/models/weather.dart';
 import 'package:weather/logic/bloc/weatherevent.dart';
 import 'package:weather/logic/bloc/weatherstate.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../private_data/fetchweather.dart';
-class WeatherBloc extends Bloc<weatherEvent, weatherState>{
-  WeatherBloc(): super(InitialSate()){
+
+class WeatherBloc extends Bloc<weatherEvent, weatherState> {
+  WeatherBloc() : super(InitialSate()) {
     getLocation();
 
-    on<HomeCall>((event, emit) => {
-    });
+    on<HomeCall>((event, emit) => {});
+  }
 
-  }
   FetchWeather fetchWeather = FetchWeather();
-  void fetcWithCor() async{
-  }
+
+  void fetcWithCor() async {}
 
   void getLocation() async {
     double laltitude = 0.0;
@@ -36,11 +37,13 @@ class WeatherBloc extends Bloc<weatherEvent, weatherState>{
       }
     }
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high)
-        .then((value) {
+            desiredAccuracy: LocationAccuracy.high)
+        .then((value) async {
       laltitude = value.latitude;
       longitude = value.longitude;
-      print(laltitude);
+      WeatherInfo weatherInfo = await fetchWeather.getWeatherWithCor(laltitude, longitude);
+      emit(ResultLoadedState(weatherInfo));
+      print(weatherInfo.coord.lat);
     });
   }
 }
