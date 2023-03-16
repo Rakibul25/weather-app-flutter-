@@ -48,4 +48,5 @@ class GlobalController extends GetxController {
       _isLoading.value = false;
     });
   }
+
 }

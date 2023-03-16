@@ -27,17 +27,17 @@ class WeatherInfo {
 
   Coord coord;
   List<Weather> weather;
-  String base;
+  dynamic base;
   Main main;
-  int visibility;
+  dynamic visibility;
   Wind wind;
   Clouds clouds;
-  int dt;
+  dynamic dt;
   Sys sys;
-  int timezone;
-  int id;
-  String name;
-  int cod;
+  dynamic timezone;
+  dynamic id;
+  dynamic name;
+  dynamic cod;
 
   factory WeatherInfo.fromJson(Map<String, dynamic> json) => WeatherInfo(
     coord: Coord.fromJson(json["coord"]),
@@ -77,7 +77,7 @@ class Clouds {
     required this.all,
   });
 
-  int all;
+  dynamic all;
 
   factory Clouds.fromJson(Map<String, dynamic> json) => Clouds(
     all: json["all"],
@@ -94,8 +94,8 @@ class Coord {
     required this.lat,
   });
 
-  double lon;
-  double lat;
+  dynamic lon;
+  dynamic lat;
 
   factory Coord.fromJson(Map<String, dynamic> json) => Coord(
     lon: json["lon"]?.toDouble(),
@@ -118,12 +118,12 @@ class Main {
     required this.humidity,
   });
 
-  double temp;
-  double feelsLike;
-  double tempMin;
-  double tempMax;
-  int pressure;
-  int humidity;
+  dynamic temp;
+  dynamic feelsLike;
+  dynamic tempMin;
+  dynamic tempMax;
+  dynamic pressure;
+  dynamic humidity;
 
   factory Main.fromJson(Map<String, dynamic> json) => Main(
     temp: json["temp"]?.toDouble(),
@@ -153,11 +153,11 @@ class Sys {
     required this.sunset,
   });
 
-  int type;
-  int id;
-  String country;
-  int sunrise;
-  int sunset;
+  dynamic type;
+  dynamic id;
+  dynamic country;
+  dynamic sunrise;
+  dynamic sunset;
 
   factory Sys.fromJson(Map<String, dynamic> json) => Sys(
     type: json["type"],
@@ -184,10 +184,10 @@ class Weather {
     required this.icon,
   });
 
-  int id;
-  String main;
-  String description;
-  String icon;
+  dynamic id;
+  dynamic main;
+  dynamic description;
+  dynamic icon;
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
     id: json["id"],
@@ -210,8 +210,8 @@ class Wind {
     required this.deg,
   });
 
-  double speed;
-  int deg;
+  dynamic speed;
+  dynamic deg;
 
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
     speed: json["speed"]?.toDouble(),

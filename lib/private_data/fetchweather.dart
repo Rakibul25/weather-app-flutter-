@@ -22,4 +22,17 @@ class FetchWeather {
       throw ex;
     }
   }
+  Future<WeatherInfo> getWeatherWithquery(String query) async {
+    try {
+      //trying to fetch blocs result with blocs keyword
+      Response response = await api.sendRequest.get(
+          "https://api.openweathermap.org/data/2.5/weather?q=$query&appid=$Apikey&units=metric&fbclid=IwAR1j_iZwd5fzqizOFYVjFsy3HztfL0MW1PQ7Pn8svwKJTX-1WUerJ0URNuw");
+      var data = response.data;
+      return WeatherInfo.fromJson(data);
+      //saving instance in data and parsing in productmodel and then return
+      //return WeatherInfo.fromJson(data);
+    } catch (ex) {
+      throw ex;
+    }
+  }
 }
