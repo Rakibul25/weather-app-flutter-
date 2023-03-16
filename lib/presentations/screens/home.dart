@@ -19,8 +19,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black38,
         body: SafeArea(
           child: Column(
             children: [
@@ -39,13 +40,8 @@ class _HomeState extends State<Home> {
                         decoration: InputDecoration(
                           hintText: hints,
                           hintStyle:
-                              TextStyle(fontSize: 15, color: Colors.black),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green),
-                          ),
+                              TextStyle(fontSize: 15, color: Colors.white),
+
                           suffixIcon: GestureDetector(
                               onTap: () {
                                 BlocProvider.of<WeatherBloc>(context)
@@ -53,7 +49,7 @@ class _HomeState extends State<Home> {
                               },
                               child: const Icon(
                                 Icons.search,
-                                color: Colors.green,
+                                color: Colors.white,
                               )),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
@@ -63,21 +59,46 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: Colors.blueGrey,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 30.0,right: 20),
-                      child: GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<WeatherBloc>(context)
-                              .add(locatePressed());
-                        },
-                        child: Icon(
-                          Icons.my_location_outlined,
-                          color: Colors.green,
-                        ),
+                      padding: const EdgeInsets.only(bottom: 28.0),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              BlocProvider.of<WeatherBloc>(context)
+                                  .add(locatePressed());
+                            },
+                            child: Icon(
+                              Icons.my_location_outlined,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 5,),
+                          Text("Trace",style: TextStyle(color: Colors.white),)
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 28.0),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              BlocProvider.of<WeatherBloc>(context)
+                                  .add(locatePressed());
+                            },
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 5,),
+                          Text("Share", style: TextStyle(color: Colors.white),)
+                        ],
                       ),
                     ),
                   ],
@@ -87,14 +108,24 @@ class _HomeState extends State<Home> {
                 child: BlocBuilder<WeatherBloc, weatherState>(
                   builder: (context, state) {
                     if (state is InitialSate) {
-                      BlocProvider.of<WeatherBloc>(context).add(HomeCall());
                       return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
                     if (state is ResultLoadedStateWithcordinate) {
-                      return Center(
-                        child: Text(state.weatherInfo.main.temp.toString()),
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: size.width*.9,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(10,)
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     }
                     if(state is ResultLoadedStateWithquery){

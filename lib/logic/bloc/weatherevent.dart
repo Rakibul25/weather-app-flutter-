@@ -10,7 +10,6 @@ class locatePressed extends weatherEvent{
 }
 class LocatePressed extends weatherEvent{
 }
-class HomeCall extends weatherEvent{
-}
+
 
 

@@ -11,7 +11,6 @@ class WeatherBloc extends Bloc<weatherEvent, weatherState> {
   WeatherBloc() : super(InitialSate()) {
     getLocation();
 
-    on<HomeCall>((event, emit) => {});
     on<locatePressed>((event, emit) => {
       emit(ResultLoadingState()),
       Future.delayed(Duration(microseconds: 10)).then((value) => {
