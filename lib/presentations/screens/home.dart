@@ -5,8 +5,8 @@ import 'package:weather/logic/bloc/weatherstate.dart';
 import 'package:weather/private_data/fetchweather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
 import '../widgets/halfcircle.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -234,21 +234,29 @@ class _HomeState extends State<Home> {
                     }
                     if (state is ResultLoadedStateWithquery) {
                       int temperature = state.weatherInfo.main.temp.round();
-                      DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunrise * 1000);
-                      DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunset * 1000);
-                      String sunriseTime = DateFormat('h:mm a').format(sunriseDateTime);
-                      String sunsetTime = DateFormat('h:mm a').format(sunsetDateTime);
+                      int ms = state.weatherInfo.sys.sunrise*1000;
+                      DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunrise * 1000).toUtc();
+                      DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunset * 1000).toUtc();
+                      DateTime actualsunriseDateTime = sunriseDateTime.add(Duration(seconds: state.weatherInfo.timezone));
+                      DateTime actualsunsetDateTime = sunsetDateTime.add(Duration(seconds: state.weatherInfo.timezone));
+                      String sunriseTime = DateFormat('h:mm a').format(actualsunriseDateTime);
+                      String sunsetTime = DateFormat('h:mm a').format(actualsunsetDateTime);
                       DateTime now = DateTime.now();
+                      DateTime londonTime = DateTime.now().toUtc();
+                      DateTime utcNow = now.toUtc();
+
+
                       double progressValue = 0.0;
                       if (now.isBefore(sunriseDateTime)) {
                         progressValue = 0.0;
                       } else if (now.isAfter(sunsetDateTime)) {
                         progressValue = 1.0;
                       } else {
-                        progressValue = (sunsetDateTime.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch) /
+                        progressValue = (utcNow.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch) /
                             (sunsetDateTime.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch);
                       }
-                      print(sunriseDateTime.toString());
+
+
 
                       return SingleChildScrollView(
                         child: Column(
@@ -318,7 +326,7 @@ class _HomeState extends State<Home> {
                                       children: [
                                         Column(
                                           children: [
-                                            Icon(Icons.sunny_snowing,color: Colors.white,),
+                                            Icon(Icons.sunny,color: Colors.white,),
                                             Text('Sunrise: $sunriseTime',style: TextStyle(color: Colors.white),)
                                           ],
                                         ),
