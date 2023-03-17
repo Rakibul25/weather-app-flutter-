@@ -4,7 +4,9 @@ import 'package:weather/logic/bloc/weatherevent.dart';
 import 'package:weather/logic/bloc/weatherstate.dart';
 import 'package:weather/private_data/fetchweather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../widgets/halfcircle.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 250,
+                      width: 200,
                       height: 100,
                       child: TextField(
                         controller: query,
@@ -41,7 +43,6 @@ class _HomeState extends State<Home> {
                           hintText: hints,
                           hintStyle:
                               TextStyle(fontSize: 15, color: Colors.white),
-
                           suffixIcon: GestureDetector(
                               onTap: () {
                                 BlocProvider.of<WeatherBloc>(context)
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
                       child: Column(
                         children: [
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               BlocProvider.of<WeatherBloc>(context)
                                   .add(locatePressed());
                             },
@@ -77,27 +78,13 @@ class _HomeState extends State<Home> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 5,),
-                          Text("Trace",style: TextStyle(color: Colors.white),)
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 28.0),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: (){
-                              BlocProvider.of<WeatherBloc>(context)
-                                  .add(locatePressed());
-                            },
-                            child: Icon(
-                              Icons.share,
-                              color: Colors.white,
-                            ),
+                          SizedBox(
+                            height: 5,
                           ),
-                          SizedBox(height: 5,),
-                          Text("Share", style: TextStyle(color: Colors.white),)
+                          Text(
+                            "Trace",
+                            style: TextStyle(color: Colors.white),
+                          )
                         ],
                       ),
                     ),
@@ -113,24 +100,265 @@ class _HomeState extends State<Home> {
                       );
                     }
                     if (state is ResultLoadedStateWithcordinate) {
+                      int temperature = state.weatherInfo.main.temp.round();
+                      DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunrise * 1000);
+                      DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunset * 1000);
+                      String sunriseTime = DateFormat('h:mm a').format(sunriseDateTime);
+                      String sunsetTime = DateFormat('h:mm a').format(sunsetDateTime);
+                      DateTime now = DateTime.now();
+                      double progressValue = 0.0;
+                      if (now.isBefore(sunriseDateTime)) {
+                        progressValue = 0.0;
+                      } else if (now.isAfter(sunsetDateTime)) {
+                        progressValue = 1.0;
+                      } else {
+                        progressValue = (now.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch) /
+                            (sunsetDateTime.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch);
+                      }
+                      print(sunriseDateTime.toString());
+
                       return SingleChildScrollView(
                         child: Column(
                           children: [
                             Container(
-                              width: size.width*.9,
-                              height: 200,
+                              width: size.width * .9,
+                              height: size.height * .35,
                               decoration: BoxDecoration(
                                   color: Colors.blueGrey,
-                                  borderRadius: BorderRadius.circular(10,)
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  )),
+                              child: Padding(
+                                padding: EdgeInsets.all(25.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          
+                                          children: [
+                                            Text(
+                                              "$temperature°C",
+                                              style: TextStyle(
+                                                  fontSize: 40,
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "${state.placemark.subLocality}, ${state.placemark.locality}",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
+                                            ),
+                                            Text("${state.placemark.country}",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20)),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 8.0),
+                                                    child: Image.asset(
+                                                      "assets/icon/${state.weatherInfo.weather[0].icon.toString()}.png",
+                                                      height: 100,
+                                                      width: 100,
+                                                    )),
+                                                Text(
+                                                    "${state.weatherInfo.weather[0].description.toString()}",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 15)),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Icon(Icons.sunny_snowing,color: Colors.white,),
+                                            Text('Sunrise: $sunriseTime',style: TextStyle(color: Colors.white),)
+                                          ],
+                                        ),
+                                        SizedBox(width: 10,),
+                                        Container(height:100,width: 100,  child: HalfCircleProgressBar(progressValue: progressValue)),
+                                        SizedBox(width: 10,),
+                                        Column(
+                                          children: [
+                                            Icon(Icons.mode_night,color: Colors.white,),
+                                            Text('Sunset: $sunsetTime',style: TextStyle(color: Colors.white),)
+                                          ],
+                                        ),
+
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.share,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          "Share Weather",
+                                          style: TextStyle(
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           ],
                         ),
                       );
                     }
-                    if(state is ResultLoadedStateWithquery){
-                      return Center(
-                        child: Text(state.weatherInfo.main.temp.toString()),
+                    if (state is ResultLoadedStateWithquery) {
+                      int temperature = state.weatherInfo.main.temp.round();
+                      DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunrise * 1000);
+                      DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(state.weatherInfo.sys.sunset * 1000);
+                      String sunriseTime = DateFormat('h:mm a').format(sunriseDateTime);
+                      String sunsetTime = DateFormat('h:mm a').format(sunsetDateTime);
+                      DateTime now = DateTime.now();
+                      double progressValue = 0.0;
+                      if (now.isBefore(sunriseDateTime)) {
+                        progressValue = 0.0;
+                      } else if (now.isAfter(sunsetDateTime)) {
+                        progressValue = 1.0;
+                      } else {
+                        progressValue = (sunsetDateTime.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch) /
+                            (sunsetDateTime.millisecondsSinceEpoch - sunriseDateTime.millisecondsSinceEpoch);
+                      }
+                      print(sunriseDateTime.toString());
+
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: size.width * .9,
+                              height: size.height * .35,
+                              decoration: BoxDecoration(
+                                  color: Colors.blueGrey,
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  )),
+                              child: Padding(
+                                padding: EdgeInsets.all(25.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+
+                                          children: [
+                                            Text(
+                                              "$temperature°C",
+                                              style: TextStyle(
+                                                  fontSize: 40,
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "${state.weatherInfo.name}",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 8.0),
+                                                    child: Image.asset(
+                                                      "assets/icon/${state.weatherInfo.weather[0].icon.toString()}.png",
+                                                      height: 100,
+                                                      width: 100,
+                                                    )),
+                                                Text(
+                                                    "${state.weatherInfo.weather[0].description.toString()}",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 15)),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Icon(Icons.sunny_snowing,color: Colors.white,),
+                                            Text('Sunrise: $sunriseTime',style: TextStyle(color: Colors.white),)
+                                          ],
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Container(height:80,width: 80,  child: HalfCircleProgressBar(progressValue: progressValue)),
+                                        SizedBox(width: 5,),
+                                        Column(
+                                          children: [
+                                            Icon(Icons.mode_night,color: Colors.white,),
+                                            Text('Sunset: $sunsetTime',style: TextStyle(color: Colors.white),)
+                                          ],
+                                        ),
+
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.share,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          "Share Weather",
+                                          style: TextStyle(
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     }
                     if (state is NoResultState) {
@@ -138,30 +366,36 @@ class _HomeState extends State<Home> {
                         child: Text(state.error.toString()),
                       );
                     }
-                    if(state is ResultLoadingState){
+                    if (state is ResultLoadingState) {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                    if(state is NoInternet){
+                    if (state is NoInternet) {
                       return Center(
-                        child: Text("No Internet"),
+                        child: Text(
+                          "No Internet",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       );
                     }
-                    if(state is Notmatched){
+                    if (state is Notmatched) {
                       return Center(
-                        child: Text("Not Matched"),
+                        child: Text("Not Matched",
+                            style: TextStyle(color: Colors.white)),
                       );
                     }
-                    if(state is LocationNotEnabled){
+                    if (state is LocationNotEnabled) {
                       return Center(
-                        child: Text("Location not enabled"),
+                        child: Text("Location not enabled",
+                            style: TextStyle(color: Colors.white)),
                       );
                     }
 
                     return const Center(
                       //this is for if something occur in this process
-                      child: Text("error!"),
+                      child:
+                          Text("error!", style: TextStyle(color: Colors.white)),
                     );
                   },
                 ),
