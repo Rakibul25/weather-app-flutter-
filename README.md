@@ -25,9 +25,9 @@ In the search page, users can search for weather details of any location by typi
      <td>Search</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/london.jpg" width="300" height="550"></td>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/antarctica.jpg" width="300" height="550"></td>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/rajshahi.jpg" width="300" height="550"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/london.jpg" width="150" height="220"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/antarctica.jpg" width="150" height="220"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/rajshahi.jpg" width="150" height="220"></td>
   </tr>
  </table>
  
@@ -40,8 +40,8 @@ In the search page, users can search for weather details of any location by typi
      <td>Message</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/share.jpg" width="300" height="550"></td>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/msg.jpg" width="300" height="550"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/share.jpg" width="150" height="220"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/msg.jpg" width="150" height="220"></td>
   </tr>
  </table>
  
@@ -54,8 +54,8 @@ In the search page, users can search for weather details of any location by typi
      <td>Location Service</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/nointernet.jpg" width="300" height="550"></td>
-    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/location.jpg" width="300" height="550"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/nointernet.jpg" width="150" height="220"></td>
+    <td><img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/location.jpg" width="150" height="220"></td>
   </tr>
  </table>
 
