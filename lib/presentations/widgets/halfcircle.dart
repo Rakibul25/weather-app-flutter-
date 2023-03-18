@@ -60,6 +60,20 @@ class HalfCirclePainter extends CustomPainter {
         progressAngle,
         false,
         foregroundLine);
+    TextSpan span = new TextSpan(
+      style: new TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
+      ),
+      text: "${(progressValue * 100).toStringAsFixed(0)}%",
+    );
+    TextPainter tp = new TextPainter(
+      text: span,
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.ltr,
+    );
+    tp.layout();
+    tp.paint(canvas, Offset(center.dx - tp.width / 2, center.dy - tp.height / 2));
   }
 
   @override
