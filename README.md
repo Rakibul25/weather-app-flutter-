@@ -13,10 +13,12 @@ We hope that our weather app will be a helpful resource for you in planning your
 - Allows sharing weather details with other messaging apps.
 
 ### Homepage
-When a user opens the app, they will be presented with the current weather details of their current location.
+Upon opening the app, users will be greeted with the latest weather updates of their current location. The app also features a unique half circle that displays the time difference between sunrise and sunset, giving users an idea of how close it is to sunset.
+
 <img src="https://github.com/Rakibul25/weather-app-flutter-/blob/main/screenshots/home.jpg" width="300" height="550">
 ### Search
 In the search page, users can search for weather details of any location by typing in the search bar. And by pressing trace user can see again current location data.
+
 <table>
   <tr>
      <td>Search</td>
