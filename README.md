@@ -5,6 +5,8 @@ With the app, you can easily obtain current weather data based on your device's 
 
 We hope that our weather app will be a helpful resource for you in planning your day and keeping up-to-date with the latest weather information.
 
+[Video Preview](https://www.linkedin.com/posts/rakibul-islam-9078b1187_flutter-flutterdeveloper-activity-7042835656510767104-pz6q?utm_source=share&utm_medium=member_desktop)
+
 # Feature List
 - Provides weather details based on current device location.
 - Allows searching for weather details for other cities around the world.
