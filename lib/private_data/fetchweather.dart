@@ -1,34 +1,38 @@
-import 'package:weather/models/weatherInfo.dart';
+//©Rakibul Islam
+import 'package:dio/dio.dart';
+import 'package:weather/data/models/weather.dart';
 import 'package:weather/private_data/private.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:get/get.dart';
-import 'package:weather/models/mainweather.dart';
 
-import '../globalcontroller/global_controller.dart';
+import 'API.dart';
 
 class FetchWeather {
-  WeatherInfo? weatherInfo;
-  MainWeather? mainWeather;
-  List<MainWeather>? list;
+  API api = API();
 
-  Future<WeatherInfo?> processdata(lat, lon) async {
-    var response = await http.get(Uri.parse(apiURL(lat, lon)));
-    if (response.statusCode == 200) {
-      print("Success");
-      var jsonString = jsonDecode(response.body);
-      weatherInfo = WeatherInfo.fromJson(jsonString);
-    } else {
-      print("failed");
+  //this function to fetch for initial blocs page
+  Future<WeatherInfo> getWeatherWithCor(double lat, double lon) async {
+    try {
+      //trying to fetch blocs result with blocs keyword
+      Response response = await api.sendRequest.get(
+          "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$Apikey&units=metric&fbclid=IwAR03H7NMdCtc5AscJEjcalAuesRR-GYDZZrpN1i5E-byKYIxemaPmw7colM");
+      var data = response.data;
+      return WeatherInfo.fromJson(data);
+      //saving instance in data and parsing in productmodel and then return
+      //return WeatherInfo.fromJson(data);
+    } catch (ex) {
+      throw ex;
     }
-    return weatherInfo;
-
   }
-}
-
-String apiURL(var lat, var lon) {
-  String url;
-  url =
-      "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$Apikey&units=metric&fbclid=IwAR2FcySmETLtyhMwpk06BwMM_yPwIWTPaX1Rph_Yngx6dRDuoAbHdnjK8HU";
-  return url;
+  Future<WeatherInfo> getWeatherWithquery(String query) async {
+    try {
+      //trying to fetch blocs result with blocs keyword
+      Response response = await api.sendRequest.get(
+          "https://api.openweathermap.org/data/2.5/weather?q=$query&appid=$Apikey&units=metric&fbclid=IwAR1j_iZwd5fzqizOFYVjFsy3HztfL0MW1PQ7Pn8svwKJTX-1WUerJ0URNuw");
+      var data = response.data;
+      return WeatherInfo.fromJson(data);
+      //saving instance in data and parsing in productmodel and then return
+      //return WeatherInfo.fromJson(data);
+    } catch (ex) {
+      throw ex;
+    }
+  }
 }
